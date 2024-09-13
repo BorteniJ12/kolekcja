@@ -4,95 +4,59 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+ArrayList<Integer> wylosowane = wylosujLiczby(7);
+LinkedList<Integer> wpisane = wczytajLiczby(4);
+ArrayList<Integer> trafione = prawdzKtorePowtarzajaSie(wylosowane, wpisane);
+System.out.println("Liczby wylosowane");
+wypiszListe(wylosowane);
+        System.out.println("Liczby wpisane");
+        wypiszListe(wpisane);
+        System.out.println("Liczby trafione");
+        wypiszListe(trafione);
 
-        System.out.println("Hello world!");
-        //tablica
-        /*
-        tablica musi mieć zdefiniowany rozmiar,
-         którego potem nie można zmienić,
-          tablica przechowuje typy proste i złożone
-         */
-        int[] tablicaLiczbLosowych = new int[6];
-        //losujemy z zakresu 1 do 100
-        for (int i = 0; i < tablicaLiczbLosowych.length; i++) {
-            tablicaLiczbLosowych[i] = (int) (Math.random() * 100);
-        }
-        //wypisywamoe tablicy na ekranie
-        for (int element : tablicaLiczbLosowych) {
-            System.out.print(element + ", ");
-        }
-//wypełnianie kolekcji wartościami losowymi
-        /*
-        Kolekcja może przechowywać tylko typy złożone
-        np. Integer
-        Kolekcja nie musi mieć zdefiniowanego rozmiar
-        rozmiar może się zmieniać w trakcie
-        List -> ArrayList, LinkedList,
-        Set -> HashSet
-        Map
-         */
+    }
 
-        List<Integer> listaLiczbLosowych = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            int liczba = (int) (Math.random() * 100);
-            listaLiczbLosowych.add(liczba);
-        }
-        System.out.println("tablicaLiczbLosowych");
-        for (Integer element : listaLiczbLosowych) {
-            System.out.print(element + ", ");
-        }
-        System.out.println(listaLiczbLosowych);
-        //losowanie do listy bez powtórzeń
+    /**
+     * wylosujLiczby - metoda, która losuje liczby całkowite z zakresu 1, 100
+     * @param ile - liczba wylosowanych wartości
+     * @return lista z wylosowanymi wartościami
+     */
+    private static ArrayList<Integer> wylosujLiczby ( int ile){
         ArrayList<Integer> listaLosowychBezPowtórzeń = new ArrayList<>();
         int liczba;
-        for (int i = 0; i < 6; i++) {
-            liczba = (int)(Math.random()*100+1);
-            while (listaLosowychBezPowtórzeń.contains(liczba)){
-                liczba = (int)(Math.random()*100+1);
+        for (int i = 0; i < ile; i++) {
+            liczba = (int) (Math.random() * 100 + 1);
+            while (listaLosowychBezPowtórzeń.contains(liczba)) {
+                liczba = (int) (Math.random() * 100 + 1);
             }
-
-
             listaLosowychBezPowtórzeń.add(liczba);
-
         }
-        System.out.println(listaLosowychBezPowtórzeń);
-        /*
-        lista:
-        indeksowana, uporządkowana, elementy mogą się powtarzać
-        zbiór: (zazwyczaj)
-        nieindeksowana, nieuporządkowane, elementy unikatowe
-         */
-        HashSet <Integer> zbiorLiczbLosowych = new HashSet<>();
-        while (zbiorLiczbLosowych.size()<6){
-            liczba = (int)(Math.random()*100+1);
-            zbiorLiczbLosowych.add(liczba);
-        }
-        System.out.println("Zbior liczb losowych");
-                System.out.println(zbiorLiczbLosowych);
-
-
-                //lista liczb wczytywanych z klawiatury
+        return listaLosowychBezPowtórzeń;
+    }
+    private static LinkedList<Integer> wczytajLiczby(int ile){
+        LinkedList<Integer> wpisane =new LinkedList<>();
         Scanner klawiatura = new Scanner(System.in);
-        LinkedList<Integer> listaLiczbZKlawiatury = new Linkedlist<>();
-        System.out.println("Podaj 6 liczb");
-        for (int i = 0; i <6 ; i++) {
-            int wartosc = klawiatura.nextInt();
-            listaLiczbZKlawiatury.add(wartosc);
-
-
+        System.out.println("podaj" +ile+ "liczb");
+        for (int i = 0; i <ile ; i++) {
+            wpisane.add(klawiatura.nextInt());
         }
-        //wstawianie
-        LinkedList<Integer> wpisane = new LinkedList<>();
-        S
+        return wpisane;
+    }
 
-
-        //trafione czyli takie które są i we wpisanych i w wylosowanych
-        for (Integer element:listaLosowychBezPowtórzeń) {
-       if(listaLiczbZKlawiatury)
+    private static void wypiszListe(List<Integer>lista){
+        for (Integer element:lista){
+            System.out.println(element+", ");
         }
+    }
 
-
-     }
-
+    private static ArrayList<Integer> prawdzKtorePowtarzajaSie(ArrayList<Integer> wpisane, LinkedList<Integer> wylosowane){
+        ArrayList<Integer> trafione = new ArrayList<>();
+        for (Integer element:wylosowane){
+            if(wpisane.contains(element)){
+                trafione.add(element);
+            }
+        }
+        return trafione;
+    }
 }
 
